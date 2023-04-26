@@ -1,10 +1,10 @@
 // const express = require("express");
 // const app = express();
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 // const mongoose = require("mongoose");
 // // const { mainRoutes } = require("./Routes/index");
 // const port = 3004;
-// const cors = require("cors");
+const cors = require("cors");
 
 // const dConnection =
 //     "mongodb+srv://admin:admin@cluster0.sshqcpg.mongodb.net/OnlineSeller";
@@ -58,6 +58,11 @@ const PORT = 4000
 app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `)
 })
+
+app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.send('Hey this is my API running 🥳')
