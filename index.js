@@ -19,7 +19,6 @@ mongoose
         console.log("DB Connected!");
     })
     .catch((err) => {
-        console.log("🚀 ~ file: index.js:24 ~ err:", err)
         throw new Error("Database credentials are invalid.");
     });
 
@@ -29,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Getting Request
-app.get('/', (req, res) => {
+app.use('/', (req, res) => {
  
     // Sending the response
     res.send('Hello World!')
