@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 // // const { mainRoutes } = require("./Routes/index");
 // const port = 3004;
 const cors = require("cors");
@@ -23,6 +23,9 @@ const cors = require("cors");
 //         throw new Error("Database credentials are invalid.");
 //     });
 
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error(err));
 // app.use(cors());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
