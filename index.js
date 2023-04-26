@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 // // const { mainRoutes } = require("./Routes/index");
 // const port = 3004;
+require('dotenv').config();
 const cors = require("cors");
 
 // const dConnection =
