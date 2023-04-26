@@ -6,22 +6,22 @@ const mongoose = require("mongoose");
 // const port = 3004;
 const cors = require("cors");
 
-const dConnection =
-    "mongodb+srv://admin:admin@cluster0.sshqcpg.mongodb.net/OnlineSeller";
+// const dConnection =
+//     "mongodb+srv://admin:admin@cluster0.sshqcpg.mongodb.net/OnlineSeller";
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-};
-mongoose
-    .connect(dConnection, options)
-    .then(() => {
-        console.log("DB Connected!");
-    })
-    .catch((err) => {
-        console.log("🚀 ~ file: index.js:24 ~ err:", err)
-        throw new Error("Database credentials are invalid.");
-    });
+// const options = {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// };
+// mongoose
+//     .connect(dConnection, options)
+//     .then(() => {
+//         console.log("DB Connected!");
+//     })
+//     .catch((err) => {
+//         console.log("🚀 ~ file: index.js:24 ~ err:", err)
+//         throw new Error("Database credentials are invalid.");
+//     });
 
 // app.use(cors());
 
