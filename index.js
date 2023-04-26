@@ -39,7 +39,9 @@ app.get('/', (req, res) => {
 })
 
 // app.use("/api/auth", authRoute);
-app.use("/onlineseller", mainRoutes);
+app.use("/onlineseller", (req,res) => {
+    res.json({ message : "Hello"})
+});
 
 
 
