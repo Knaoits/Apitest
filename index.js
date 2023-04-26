@@ -22,10 +22,10 @@ mongoose
         throw new Error("Database credentials are invalid.");
     });
 
-app.use(cors());
+// app.use(cors());
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 
 // Getting Request
 app.use('/', (req, res) => {
