@@ -1,9 +1,9 @@
 {
     "version": 2,
-    "name": "online-sell",
+    "name": "online-seller",
     "builds": [
        { "src": "app.js", "use": "@vercel/node" }
-    ],
+    ],  
     "routes": [
        { "src": "/(.*)", "dest": "/app.js" }
     ]

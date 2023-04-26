@@ -30,17 +30,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Getting Request
-app.get('/', (req, res) => {
+// app.get('/', (req, res) => {
  
-    // Sending the response
-    res.send('Hello World!')
+//     // Sending the response
+//     res.send('Hello World!')
 
-    // Ending the response
-    res.end()
-})
+//     // Ending the response
+//     res.end()
+// })
 
 // app.use("/api/auth", authRoute);
-app.use("/onlineseller", mainRoutes);
+app.use("/", (req,res) =>{ 
+    res.json({ message : "Welcome"})
+});
 
 
 
