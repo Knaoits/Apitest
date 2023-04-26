@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 // const { mainRoutes } = require("./Routes/index");
 const port = 3004;
-const cors = require("cors");
+// const cors = require("cors");
 
 const dConnection =
     "mongodb+srv://admin:admin@cluster0.sshqcpg.mongodb.net/OnlineSeller";
@@ -31,10 +31,9 @@ mongoose
 app.use('/', (req, res) => {
  
     // Sending the response
-    res.send('Hello World!')
+    res.json('Hello World!')
 
     // Ending the response
-    res.end()
 })
 
 // app.use("/api/auth", authRoute);
