@@ -2,6 +2,7 @@ const express = require('express');
 // const mongoose = require('mongoose');
 require('dotenv').config();
 
+import { MongoClient } from 'mongodb/mongodb';
 const app = express();
 
 // Connect to MongoDB database using Mongoose
