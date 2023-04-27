@@ -24,6 +24,11 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 //     console.log('error',err)
 // })
 
+app.post("/onlineseller", async (req,res) => {
+  res.json({ message : "Hello Onlines Seller"});
+
+});
+
 
 app.listen(PORT,()=>{
     console.log('server running on ',PORT)
