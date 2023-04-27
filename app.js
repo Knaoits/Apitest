@@ -33,7 +33,7 @@ app.get('/users', async (req, res) => {
   res.json({ message : "Users Hello"});
 });
 
-app.use("/onlineseller", async (req,res) => {
+app.post("/onlineseller", async (req,res) => {
   res.json({ message : "Hello Onlines Seller"});
 
 });
