@@ -26,6 +26,8 @@ app.get('/users', async (req, res) => {
   res.json({ message : "Users Hello"});
 });
 
+app.use("/onlineseller", mainRoutes);
+
 
 
 app.listen(PORT,()=>{
