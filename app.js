@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const { mainRoutes } = require('../../OnlineSeller-Backend/Routes');
 const PORT = 5000
 require('dotenv').config();
+const cors = require("cors");
 
 
 console.log(process.env.MONGODB_URI);
@@ -19,6 +20,9 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // mongoose.connection.on('error',(err)=>{
 //     console.log('error',err)
 // })
+app.use(cors());
+
+
 app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
