@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
-const { mainRoutes } = require('../../OnlineSeller-Backend/Routes');
 const PORT = 5000
 require('dotenv').config();
 const cors = require("cors");
+const { mainRoutes } = require('../../OnlineSeller-Backend/Routes');
 
 
 console.log(process.env.MONGODB_URI);
