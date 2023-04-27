@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const { mainRoutes } = require('../../OnlineSeller-Backend/Routes');
 const PORT = 5000
 require('dotenv').config();
 
