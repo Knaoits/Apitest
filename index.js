@@ -1,16 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config();
-const favicon = require('serve-favicon');
 
 const app = express();
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // Connect to MongoDB database using Mongoose
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error(err));
 
+
+  app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'favicon.ico'));
+  });
 
 
 
