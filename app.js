@@ -18,6 +18,14 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // mongoose.connection.on('error',(err)=>{
 //     console.log('error',err)
 // })
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+app.get('/users', async (req, res) => {
+  res.json({ message : "Users Hello"});
+});
+
 
 
 app.listen(PORT,()=>{
