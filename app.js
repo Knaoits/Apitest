@@ -3,11 +3,13 @@ const app = express()
 const mongoose = require('mongoose')
 const PORT = 5000
 const cors = require("cors");
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 
 app.use(cors());
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 console.log(process.env.MONGODB_URI);
 
 
