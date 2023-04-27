@@ -14,14 +14,14 @@ const addSingleOrder = async (data) => {
       return res.status(404).json({ message: "Product Not Available" });
     } 
     if (productData) {
-      await Product.updateOne({ _id : data?.product_id },
+      await Product.updateOne({ _id : data?.products?.[0]?.product_id },
         { quantity : productData?.quantity - data?.products?.[0]?.quantity}
        )
-      await Report.findOneAndUpdate(
-        { product_id: data?.products?.[0]?.product_id },
-        { $inc: { inOrderQuantity: data?.products?.[0]?.quantity, stockQuantity: -data?.products?.[0]?.quantity } },
-        { new: true }
-      );    
+         await Report.findOneAndUpdate(
+           { product_id: data?.products?.[0]?.product_id },
+           { $inc: { inOrderQuantity: data?.products?.[0]?.quantity, stockQuantity: -data?.products?.[0]?.quantity } },
+           { new: true }
+         );    
 
       const lastOrder = await Order.findOne().sort({_id: -1}).limit(1);
       const lastOrderId = lastOrder ? parseInt(lastOrder.orderId.substr(6)) : 0;
