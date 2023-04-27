@@ -1,4 +1,4 @@
-const Admin = require("../Models/Seller");
+const Admin = require("../Models/Admin");
 const Buyer = require("../Models/Buyer");
 const Order = require("../Models/Order");
 const Product = require("../Models/Product");
