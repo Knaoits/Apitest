@@ -1,3 +1,3 @@
 module.exports = {
-    mainRoutes: require("./mainRoutes")
+    mainRoutes: require("../Routes/mainRoutes.js")
 };
