@@ -5,7 +5,6 @@ const PORT = 5000
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const { mainRoutes } = require('./Routes/mainRoutes');
-
 require('dotenv').config();
 
 app.use(cors());
