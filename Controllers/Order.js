@@ -8,36 +8,38 @@ const Buyer = require("../Models/Buyer");
 
 const addSingleOrder = async (data) => {
   try{
-    let productData = await Product.findOne({_id : data?.products?.[0]?.product_id })
-    let arr = []
-    if(productData?.quantity < 0) {
-      return res.status(404).json({ message: "Product Not Available" });
-    } 
-    if (productData) {
-      await Product.updateOne({ _id : data?.products?.[0]?.product_id },
-        { quantity : productData?.quantity - data?.products?.[0]?.quantity}
-       )
-         await Report.findOneAndUpdate(
-           { product_id: data?.products?.[0]?.product_id },
-           { $inc: { inOrderQuantity: data?.products?.[0]?.quantity, stockQuantity: -data?.products?.[0]?.quantity } },
-           { new: true }
-         );    
+    const promises = data?.products?.map( async (ele) => {
+      let productData = await Product.findOne({_id : ele?.product_id })
+      let arr = []
+      if(productData?.quantity < 0) {
+        return res.status(404).json({ message: "Product Not Available" });
+      } 
+      if (productData) {
+        await Product.updateOne({ _id : ele?.product_id },
+          { quantity : productData?.quantity - ele?.quantity}
+         )
+        await Report.findOneAndUpdate(
+          { product_id: ele?.product_id },
+          { $inc: { inOrderQuantity: ele?.quantity, stockQuantity: -ele?.quantity } },
+          { new: true }
+        );    
+        }
+    })
 
+      await Promise.all(promises) 
+      
       const lastOrder = await Order.findOne().sort({_id: -1}).limit(1);
       const lastOrderId = lastOrder ? parseInt(lastOrder.orderId.substr(6)) : 0;
       const nextOrderId = "ORD" + (lastOrderId + 1).toString().padStart(6, '0');
       let order = new Order({...data, orderId: nextOrderId});
        await order.save()
-    }
-    if(!productData){
-      return res.status(400).json({ message: "Product Not Available" });
-    }
+    
     if(data?.cart_id){
       if(data?.cart_id === "All"){
-        await Buyer.updateOne(
-          { _id: data?.buyer_id },
-          { $set: { cart: [] } }
-       )
+        let promises = data?.products?.forEach(async (ele) => {
+          await removeProductFromCart(ele?.product_id,data?.buyer_id)
+        })
+        await Promise.all(promises)
       }else{
         await removeProductFromCart(data?.products?.[0]?.product_id,data?.buyer_id)
       }
@@ -51,9 +53,11 @@ const addSingleOrder = async (data) => {
 const addNewOrder = async (req,res) => {
   try{
     let data = req?.body
+    const promises = [];
     data?.map((ele) => {
-      addSingleOrder(ele)
+      promises.push(addSingleOrder(ele))
     })
+    await Promise.all(promises)
     return res.status(200).json({ message: "Order Placed Successfully" });
   } catch(e) {
     return res.status(400).json({ message: "Error placing order" });
@@ -147,7 +151,7 @@ const updateOrderStatus = async (req,res) => {
             },
           };
         } else if (status === "delivered") {
-          quantityUpdate = { $inc: { quantity: -ele.quantity } };
+          quantityUpdate = {};
           reportUpdate = {
             $inc: {
               sellQuantity: ele.quantity,
